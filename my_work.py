@@ -3,7 +3,7 @@ calendar = {}
 def add_event(date, time, description):
     try:
         date_str = date + " " + time
-        datetime_obj = datetime.datetime.strftime(date_str, '%d-%m-%Y %H:%M')
+        datetime_obj = datetime.datetime.strptime(date_str, '%d-%m-%Y %H:%M')
         calendar[datetime_obj] = description
 
     except ValueError:
@@ -13,6 +13,19 @@ def add_event(date, time, description):
 def view_events():
     for event in sorted(calendar.keys()):
         print(f"Дата и время: {event.strftime('%A %d/%m/%Y %H:%M')}, Описание: {calendar[event]}")
+
+
+def delete_event(date, time):
+    try:
+        date_str = date + " " + time
+        datetime_obj = datetime.datetime.strftime(date_str, '%d-%m-%Y %H:%M')
+        if datetime_obj in calendar:
+            del calendar[datetime_obj]
+        else:
+            print("Событие не найдено")
+
+    except ValueError:
+        print("Не верный формат даты и времени")
 
 while True:
     print("""
@@ -32,6 +45,7 @@ while True:
     elif choice == '3':
 
     elif choice == '4':
-
+        print("Спасибо что пользовались нашей программой, до свидания ! :)")
+        break
     else:
         print("Неверный выбор, попробуйте еще раз")
