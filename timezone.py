@@ -14,10 +14,14 @@ _________________________________________________
 _________________________________________________
 """)
 print("Доступные часовые зоны: ")
-for tzone in common_timezones:
+for tzone in all_timezones:
     print(tzone)
-
-zone = input("Введите целевой часовой пояс: ")
+while True:
+    zone = input("Введите целевой часовой пояс: ")
+    if zone in all_timezones:
+        break
+    else:
+        print("Ввод не корректен, введите еще раз")
 
 result = convert_timezone(zone)
 print(f"Время в целевом часовом поясе {result}")
