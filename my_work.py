@@ -1,4 +1,7 @@
 import datetime
+
+from colorama import Fore, Style
+
 calendar = {}
 def add_event(date, time, description):
     try:
@@ -9,16 +12,19 @@ def add_event(date, time, description):
     except ValueError:
         print("Не верный формат даты и времени")
 
+# strptime - из строки в дату
+# strftime - из даты в строку
 
+#для добавления цветов консоли - pip install colorama
 def view_events():
     for event in sorted(calendar.keys()):
-        print(f"Дата и время: {event.strftime('%A %d/%m/%Y %H:%M')}, Описание: {calendar[event]}")
+        print(f" {Fore.RED + "Дата и время:" + Style.RESET_ALL} {event.strftime('%A %d/%m/%Y %H:%M')}, Описание: {calendar[event]}")
 
 
 def delete_event(date, time):
     try:
         date_str = date + " " + time
-        datetime_obj = datetime.datetime.strftime(date_str, '%d-%m-%Y %H:%M')
+        datetime_obj = datetime.datetime.strptime(date_str, '%d-%m-%Y %H:%M')
         if datetime_obj in calendar:
             del calendar[datetime_obj]
         else:
@@ -41,9 +47,11 @@ while True:
         description = input("Введите описание события:")
         add_event(description=description, time=time, date=date)
     elif choice == '2':
-
+        view_events()
     elif choice == '3':
-
+        date = input("Введите дату (дд-мм-гггг)")
+        time = input("Введите время (чч:мм)")
+        delete_event(date, time)
     elif choice == '4':
         print("Спасибо что пользовались нашей программой, до свидания ! :)")
         break
