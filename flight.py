@@ -1,5 +1,6 @@
 from datetime import datetime
 import pytz
+from colorama import Fore,Style
 
 
 def calculate_individual_flight_time(flight):
@@ -16,7 +17,7 @@ def calculate_individual_flight_time(flight):
 
     return flight_duration
 
-def calculate_total_and_average_flight_time(flight):
+def calculate_total_and_average_flight_time(flights):
     total_flight_time = 0
     flight_count = 0
 
@@ -46,7 +47,18 @@ flights = [
         'arrival_time': '2024-07-05 16:50:00',
         'departure_timezone': 'Europe/Moscow',
         'arrival_timezone': 'Asia/Tokyo'
+    },
+    {
+        'number': 'RT178-06',
+        'departure_time': '2024-07-06 01:40:00',
+        'arrival_time': '2024-07-06 16:50:00',
+        'departure_timezone': 'Europe/Moscow',
+        'arrival_timezone': 'Europe/Istanbul'
     }
 ]
 
-print(calculate_individual_flight_time(flights[0]))
+total_flight_time, average_flight_time = calculate_total_and_average_flight_time(flights)
+
+print(f"{Fore.MAGENTA + "Общее время полета:" + Style.RESET_ALL} {total_flight_time} минут")
+print(f"{Fore.BLUE + "Среднее время полета:" + Style.RESET_ALL} {round(average_flight_time,2)} минут")
+
