@@ -51,5 +51,8 @@ def menu():
             delete_event(filename, index)
         elif choice == '4':
             view_event(filename)
-
+        elif choice == '5':
+            break
+        else:
+            print("Неверный выбор, повторите ввод")
 menu()
