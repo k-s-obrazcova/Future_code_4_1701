@@ -15,6 +15,15 @@ def modify_event(filename, index, new_event):
             else:
                 file.write(line)
 
+def delete_event(filename, index):
+    with open(filename, 'r+', encoding='utf-8') as file:
+        lines = file.readlines()
+        file.seek(0)
+        file.truncate()
+        for i, line in enumerate(lines):
+            if i != index - 1:
+                file.write(line)
+
 def menu():
     filename = 'notepad.txt'
     while True:
@@ -31,5 +40,8 @@ def menu():
             index = int(input("Введите номер строки для изменения: "))
             new_event = input("Введите событие: ")
             modify_event(filename, index, new_event)
+        elif choice == '3':
+            index = int(input("Введите номер строки для изменения: "))
+            delete_event(filename, index)
 
 menu()
