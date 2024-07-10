@@ -24,6 +24,12 @@ def delete_event(filename, index):
             if i != index - 1:
                 file.write(line)
 
+def view_event(filename):
+    with open(filename, 'r', encoding='utf-8') as file:
+        lines = file.readlines()
+        for i, line in enumerate(lines):
+            print(f"{i + 1}. {line.split(' ', 1)[1]}")
+
 def menu():
     filename = 'notepad.txt'
     while True:
@@ -43,5 +49,7 @@ def menu():
         elif choice == '3':
             index = int(input("Введите номер строки для изменения: "))
             delete_event(filename, index)
+        elif choice == '4':
+            view_event(filename)
 
 menu()
