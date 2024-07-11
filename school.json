@@ -1,1 +1,25 @@
-[{"name": "Mike", "role": "student", "grades": [5, 4]}, {"name": "Ksenia", "role": "teacher", "grades": []}, {"name": "Dan", "role": "student", "grades": []}, {"name": "teo", "role": "student", "grades": []}]
+[
+  {
+    "name": "Mike",
+    "role": "student",
+    "grades": [
+      5,
+      4
+    ]
+  },
+  {
+    "name": "Ksenia",
+    "role": "teacher",
+    "grades": []
+  },
+  {
+    "name": "Dan",
+    "role": "student",
+    "grades": []
+  },
+  {
+    "name": "Teo",
+    "role": "student",
+    "grades": []
+  }
+]

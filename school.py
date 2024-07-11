@@ -23,6 +23,14 @@ def view_student_data(name, users):
             return
     print("Студент с таким именем не существует")
 
+def view_teacher_data(name, users):
+    for user in users:
+        if user["name"] == name and user["role"] == "teacher":
+            print(f"Имя: {user['name']}")
+            print(f"Роль: {user['role']}")
+            return
+    print("Преподаватель с таким именем не существует")
+
 def add_grade(user, grade):
     if user["role"] == "student":
         user['grades'].append(grade)
@@ -57,7 +65,11 @@ def menu():
             name = input("Введите имя студента: ")
             view_student_data(name, users)
 
+        elif choice == "4":
+            name = input("Введите имя преподавателя: ")
+            view_teacher_data(name, users)
 
-
+        elif choice == "5":
+            break
 
 menu()
