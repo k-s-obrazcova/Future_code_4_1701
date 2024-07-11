@@ -1,2 +1,9 @@
-
-
+{
+  "users": [
+    {
+      "username": "Mike",
+      "password": "Qwerty_123",
+      "role": "1"
+    }
+  ]
+}
