@@ -1,12 +1,1 @@
-[
-  {
-    "name": "Mike",
-    "role": "student",
-    "grades": []
-  },
-  {
-    "name": "Ksenia",
-    "role": "teacher",
-    "grades": []
-  }
-]
+[{"name": "Mike", "role": "student", "grades": []}, {"name": "Ksenia", "role": "teacher", "grades": []}, {"name": "Dan", "role": "student", "grades": []}]

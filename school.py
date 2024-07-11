@@ -14,20 +14,36 @@ def save_data(users, filename='school.json'):
     with open(filename, 'w') as file:
         json.dump(users, file)
 
+def add_grade(user, grade):
+    if user["role"] == "student":
+        user["grades"].append(grade)
+    else:
+        print("Оценка может быть добавлена только студенту")
+
 def menu():
     users = load_data()
     while True:
-        print("1. Создать пользователя: ")
-        print("2. Добавить оценку студенту: ")
-        print("3. Посмотреть данные студента: ")
-        print("4. Посмотреть данные преподавателя: ")
-        print("5. Выход")
+        print("1. Создать пользователя; ")
+        print("2. Добавить оценку студенту; ")
+        print("3. Посмотреть данные студента; ")
+        print("4. Посмотреть данные преподавателя; ")
+        print("5. Выход;")
         choice = input("Выберите действие: ")
         if choice == '1':
-            name = input("Введите имя пользователя")
-            role = input("Введите роль (student / teacher)")
+            name = input("Введите имя пользователя: ")
+            role = input("Введите роль (student / teacher): ")
             users.append(create_user(name, role))
             save_data(users)
+
+        elif choice == '2':
+            name = input("Введите имя студента: ")
+            grade = int(input("Введите оценку: "))
+            for user in users:
+                if user["name"] == name:
+                    add_grade(user, grade)
+                    break
+                save_data(users)
+
 
 
 menu()
