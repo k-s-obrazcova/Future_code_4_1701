@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Mike",
+    "role": "student",
+    "grades": []
+  },
+  {
+    "name": "Ksenia",
+    "role": "teacher",
+    "grades": []
+  }
+]
