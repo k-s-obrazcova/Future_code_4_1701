@@ -14,9 +14,18 @@ def save_data(users, filename='school.json'):
     with open(filename, 'w') as file:
         json.dump(users, file)
 
+def view_student_data(name, users):
+    for user in users:
+        if user["name"] == name and user["role"] == "student":
+            print(f"Имя: {user['name']}")
+            print(f"Роль: {user['role']}")
+            print(f"Оценки: {', '.join(map(str, user['grades']))}")
+            return
+    print("Студент с таким именем не существует")
+
 def add_grade(user, grade):
     if user["role"] == "student":
-        user["grades"].append(grade)
+        user['grades'].append(grade)
     else:
         print("Оценка может быть добавлена только студенту")
 
@@ -42,7 +51,12 @@ def menu():
                 if user["name"] == name:
                     add_grade(user, grade)
                     break
-                save_data(users)
+            save_data(users)
+
+        elif choice == "3":
+            name = input("Введите имя студента: ")
+            view_student_data(name, users)
+
 
 
 
