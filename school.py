@@ -5,13 +5,13 @@ def create_user(name, role):
     return {"name": name, "role": role, "grades": []}
 def load_data(filename='school.json'):
     if os.path.exists(filename) and os.path.getsize(filename) > 0:
-        with open(filename, 'r') as file:
+        with open(filename, 'r', encoding='utf-8') as file:
             return json.load(file)
     else:
         return []
 
 def save_data(users, filename='school.json'):
-    with open(filename, 'w') as file:
+    with open(filename, 'w', encoding='utf-8') as file:
         json.dump(users, file)
 
 def view_student_data(name, users):
