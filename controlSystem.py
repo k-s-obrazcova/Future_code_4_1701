@@ -45,10 +45,14 @@ def check_role(user):
     else:
         print("У вас нет необходимых прав")
 
-def view_logins(users):
+def view_logins(staff, users):
     print("Все пользователи системы: ")
     for user in users["users"]:
         print(user["username"])
+
+        if staff["role"] == "1":
+            print(user["password"])
+
 
 
 def menu():
@@ -80,7 +84,10 @@ def menu():
                 print("Сначала войдите в систему")
 
         elif choice == "4":
-            view_logins(users=data)
+            if user:
+                view_logins(staff=user, users=data)
+            else:
+                print("Сначала войдите в систему")
 
 
 menu()
