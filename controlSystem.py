@@ -30,6 +30,16 @@ def register(username, password, role, users):
     save_data(users)
     print("Пользователь успешно создан")
 
+def login(username, password, users):
+    for user in users["users"]:
+        if user["username"] == username and user["password"] == password:
+            print(f"Добро пожаловать, {username}!")
+            return user
+
+    print("Не верное имя пользователя или пароль!")
+    return None
+
+
 
 def menu():
     data = load_data()
@@ -47,5 +57,11 @@ def menu():
             password = input("Введите пароль пользователя:")
             role = input("Введите роль(1.Admin; 2.User)")
             register(username=username, password=password, role=role, users=data)
+
+        elif choice == "2":
+            username = input("Введите никнейм: ")
+            password = input("Введите пароль")
+            user = login(username=username, password=password, users=data)
+
 
 menu()
