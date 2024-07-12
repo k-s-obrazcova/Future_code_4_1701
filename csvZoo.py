@@ -7,6 +7,9 @@ def add_animal(name, species, date, weight, enclosure_size):
         writer.writerow([name, species, date, weight, enclosure_size])
 
 
+def remove_animal(name):
+
+
 def menu():
     while True:
         print("1. Добавить животное")
@@ -24,5 +27,10 @@ def menu():
             weight = input("Введите вес животного: ")
             enclosure_size = input("Размер вольера: ")
             add_animal(name=name, species=species, date=date, weight=weight, enclosure_size=enclosure_size)
+
+
+        elif choice == '2':
+            name = input("Введите название животного: ")
+
 
 menu()
