@@ -39,6 +39,12 @@ def login(username, password, users):
     print("Не верное имя пользователя или пароль!")
     return None
 
+def check_role(user):
+    if user["role"] == "1":
+        print("У вас есть права администратора")
+    else:
+        print("У вас нет необходимых прав")
+
 
 
 def menu():
@@ -62,6 +68,12 @@ def menu():
             username = input("Введите никнейм: ")
             password = input("Введите пароль")
             user = login(username=username, password=password, users=data)
+
+        elif choice == "3":
+            if user:
+                check_role(user)
+            else:
+                print("Сначала войдите в систему")
 
 
 menu()
