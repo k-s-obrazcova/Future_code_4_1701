@@ -89,5 +89,11 @@ def menu():
             else:
                 print("Сначала войдите в систему")
 
+        elif choice == "5":
+            break
+
+        else:
+            print("Неверный выбор, повторите ввод")
+
 
 menu()
