@@ -1,4 +1,5 @@
 import csv
+import datetime
 
 
 def add_animal(name, species, date, weight, enclosure_size):
@@ -69,6 +70,10 @@ def update_animal_info(name):
                 lines.append([name, species, date, weight, enclosure_size])
             else:
                 lines.append(row)
+    with open('zoo.csv', 'w', newline='') as fileWrite:
+        writer = csv.writer(fileWrite, lineterminator='\n')
+        writer.writerows(lines)
+
 
 
 def menu():
@@ -103,6 +108,11 @@ def menu():
 
         elif choice == '5':
             name = input("Введите название животного: ")
+            update_animal_info(name)
+
+        elif choice == '6':
+            name = input("Введите имя посещенного животного: ")
+            time = datetime.datetime.now()
 
 
 menu()
