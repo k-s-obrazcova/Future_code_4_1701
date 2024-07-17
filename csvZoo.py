@@ -52,6 +52,24 @@ def find_animal_by_species(species):
                 print(', '.join(row))
 
 
+def update_animal_info(name):
+    lines = list()
+    with open('zoo.csv', 'r', newline='') as file:
+        reader = csv.reader(file, lineterminator='\n')
+        lines.append(next(reader))
+        for row in reader:
+            if row[0] == name:
+                print("Текущая информация: ", ', '.join(row))
+                print("Введите новую информацию или оставьте пустую строку для сохранения предыдущего значения! ")
+                name = input("Введите название животного: ") or row[0]
+                species = input("Введите вид животного: ") or row[1]
+                date = input("Введите дату рождения животного: ") or row[2]
+                weight = input("Введите вес животного: ") or row[3]
+                enclosure_size = input("Введите размер вольера: ") or row[4]
+                lines.append([name, species, date, weight, enclosure_size])
+            else:
+                lines.append(row)
+
 
 def menu():
     while True:
@@ -82,6 +100,9 @@ def menu():
         elif choice == '4':
             species = input("Введите вид животного: ")
             find_animal_by_species(species)
+
+        elif choice == '5':
+            name = input("Введите название животного: ")
 
 
 menu()
