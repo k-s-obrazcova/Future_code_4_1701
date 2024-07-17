@@ -2,10 +2,10 @@ import csv
 import datetime
 
 
-def add_animal(name, species, date, weight, enclosure_size):
+def add_animal(name, species, date, weight, enclosure_size, visit_time=''):
     with open('zoo.csv', 'a', newline='') as file:
         writer = csv.writer(file, lineterminator='\n')
-        writer.writerow([name, species, date, weight, enclosure_size])
+        writer.writerow([name, species, date, weight, enclosure_size, visit_time])
 
 
 #
@@ -74,7 +74,18 @@ def update_animal_info(name):
         writer = csv.writer(fileWrite, lineterminator='\n')
         writer.writerows(lines)
 
-
+def create_visit_time(name, visit_time):
+    lines = list()
+    with open('zoo.csv', 'r', newline='') as file:
+        reader = csv.reader(file, lineterminator='\n')
+        lines.append(next(reader))
+        for row in reader:
+            if row[0] == name:
+                row[-1] = visit_time
+            lines.append(row)
+    with open('zoo.csv', 'w', newline='') as fileWrite:
+        writer = csv.writer(fileWrite, lineterminator='\n')
+        writer.writerows(lines)
 
 def menu():
     while True:
@@ -113,6 +124,10 @@ def menu():
         elif choice == '6':
             name = input("Введите имя посещенного животного: ")
             time = datetime.datetime.now()
+            create_visit_time(name, time)
+
+        elif choice == '7':
+            break
 
 
 menu()
