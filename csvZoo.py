@@ -6,9 +6,32 @@ def add_animal(name, species, date, weight, enclosure_size):
         writer = csv.writer(file, lineterminator='\n')
         writer.writerow([name, species, date, weight, enclosure_size])
 
+#
+# [
+#     'Название',
+#     'Тигр',
+#     'Черепаха',
+#     'Слон'
+# ]
+#
+# [
+# 'Название',
+# 'Тигр',
+# 'Черепаха',
+# ]
 
 def remove_animal(name):
+    lines = list()
+    with open('zoo.csv', 'r', newline='') as file:
+        reader = csv.reader(file, lineterminator='\n')
+        lines.append(next(reader))
+        for row in reader:
+            if row[0] != name:
+                lines.append(row)
 
+    with open('zoo.csv', 'w', newline='') as fileWrite:
+        writer = csv.writer(fileWrite, lineterminator='\n')
+        writer.writerows(lines)
 
 def menu():
     while True:
@@ -31,6 +54,7 @@ def menu():
 
         elif choice == '2':
             name = input("Введите название животного: ")
+            remove_animal(name)
 
 
 menu()
