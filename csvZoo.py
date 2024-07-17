@@ -43,6 +43,16 @@ def view_all_animals():
             print(', '.join(row))
 
 
+def find_animal_by_species(species):
+    with open('zoo.csv', 'r', newline='') as file:
+        reader = csv.reader(file, lineterminator='\n')
+        next(reader)
+        for row in reader:
+            if row[1] == species:
+                print(', '.join(row))
+
+
+
 def menu():
     while True:
         print("1. Добавить животное")
@@ -68,6 +78,10 @@ def menu():
 
         elif choice == '3':
             view_all_animals()
+
+        elif choice == '4':
+            species = input("Введите вид животного: ")
+            find_animal_by_species(species)
 
 
 menu()
