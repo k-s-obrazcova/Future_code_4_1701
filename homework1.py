@@ -55,13 +55,15 @@
 # from datetime import datetime, timedelta
 #
 #
-# def event_end(start_date_time, duration_hours):
-#     start_date_time = datetime.strptime(start_date_time, "%Y-%m-%d %H:%M:%S")
-#     end_date_time = start_date_time + timedelta(hours=duration_hours)
-#     return end_date_time
+# def event_end(date_start, hours):
+#     date_start = datetime.strptime(date_start, "%Y-%m-%d %H:%M:%S")
+#     end_time = date_start + timedelta(hours=int(hours))
+#     return end_time
 #
 #
-# print(event_end("2024-07-18 13:19:00", 1))
+# date_start = input("Введите дату и время в формате YYYY-MM-DD HH:MM:SS ")
+# hours = input("Введите продолжительность события в часах: ")
+# print(event_end(date_start, hours))
 
 
 # 5.	Дано время отправления самолета из аэропорта в Москве и время полета до Нью-Йорка.
