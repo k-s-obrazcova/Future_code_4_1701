@@ -28,8 +28,21 @@ def work_files():
             reader = csv.reader(file)
             next(reader)
             times, temps, humids = zip(
-                *[(datetime.datetime.strptime(row[0], '%H:%M:S').time(),
+                *[(datetime.datetime.strptime(row[0], '%H:%M:%S').time(),
                    float(row[1]),
                    float(row[2])) for row in reader])
             data[date] = {'times': times, 'temps': temps, 'humids': humids}
     return data
+
+def analyze_data(data):
+    for date, values in data.items():
+        print(f"Дата: {date}")
+        print(f"Среднее значение температуры: {statistics.mean(values['temps'])}")
+        print(f"Максимальная температура: {max(values['temps'])}")
+        print(f"Минимальная температура: {min(values['temps'])}")
+
+
+
+
+data = work_files()
+analyze_data(data)
