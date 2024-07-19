@@ -19,3 +19,10 @@ def calculate_time_and_weight(directory, column):
     end_time = timeit.default_timer()
     work_time = end_time - start_time
     return mean, work_time
+
+
+directory = "."
+column = "Вес"
+mean, work_time = calculate_time_and_weight(directory, column)
+print(f"Среднее значение для столбика {column} в файле zoo.csv: {mean}")
+print(f"Среднее время работы функции {work_time} секунд")
