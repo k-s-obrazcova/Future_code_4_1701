@@ -19,6 +19,9 @@ class ImageEditor:
         self.apply_effect_negative = tk.Button(self.root, text="Добавить негатив", command=self.negative_photo)
         self.apply_effect_negative.pack()
 
+        self.apply_effect_blur = tk.Button(self.root, text="Добавить блюр", command=self.blur_photo)
+        self.apply_effect_blur.pack()
+
         self.image_label = tk.Label(self.root)
         self.image_label.pack()
 
@@ -26,6 +29,11 @@ class ImageEditor:
     def negative_photo(self):
         if self.modified_image:
             self.modified_image = ImageOps.invert(self.modified_image)
+            self.display_image(self.modified_image)
+
+    def blur_photo(self):
+        if self.modified_image:
+            self.modified_image = self.modified_image.filter(ImageFilter.GaussianBlur(30.0))
             self.display_image(self.modified_image)
     def open_image(self):
         filename = filedialog.askopenfilename(
