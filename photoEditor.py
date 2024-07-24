@@ -22,6 +22,9 @@ class ImageEditor:
         self.apply_effect_blur = tk.Button(self.root, text="Добавить блюр", command=self.blur_photo)
         self.apply_effect_blur.pack()
 
+        self.apply_effect_rotate = tk.Button(self.root, text="Повернуть", command=self.rotate_photo)
+        self.apply_effect_rotate.pack()
+
         self.image_label = tk.Label(self.root)
         self.image_label.pack()
 
@@ -34,6 +37,11 @@ class ImageEditor:
     def blur_photo(self):
         if self.modified_image:
             self.modified_image = self.modified_image.filter(ImageFilter.GaussianBlur(30.0))
+            self.display_image(self.modified_image)
+
+    def rotate_photo(self):
+        if self.modified_image:
+            self.modified_image = self.modified_image.rotate(90, expand=True)
             self.display_image(self.modified_image)
     def open_image(self):
         filename = filedialog.askopenfilename(
