@@ -16,9 +16,17 @@ class ImageEditor:
         self.open_button = tk.Button(self.root, text="Открыть изображение", command=self.open_image)
         self.open_button.pack()
 
+        self.apply_effect_negative = tk.Button(self.root, text="Добавить негатив", command=self.negative_photo)
+        self.apply_effect_negative.pack()
+
         self.image_label = tk.Label(self.root)
         self.image_label.pack()
 
+
+    def negative_photo(self):
+        if self.modified_image:
+            self.modified_image = ImageOps.invert(self.modified_image)
+            self.display_image(self.modified_image)
     def open_image(self):
         filename = filedialog.askopenfilename(
             filetypes=(("PNG files", "*.png"), ("JPEG/JPG files", "*.jpg;*.jpeg"), ("All files", "*.*")))
