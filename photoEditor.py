@@ -26,12 +26,17 @@ class ImageEditor:
         self.apply_effect_rotate = tk.Button(self.root, text="Повернуть", command=self.rotate_photo)
         self.apply_effect_rotate.pack()
 
+        self.apply_sepia = tk.Button(self.root, text="Добавить эффект сепии", command=self.apply_effect_sepia)
+        self.apply_sepia.pack()
+
         self.apply_undo = tk.Button(self.root, text="Откатить", command=self.undo_last_action)
         self.apply_undo.pack()
 
+        self.save_button = tk.Button(self.root, text="Сохранить", command=self.save_image)
+        self.save_button.pack()
+
         self.image_label = tk.Label(self.root)
         self.image_label.pack()
-
 
     def undo_last_action(self):
         if self.history:
@@ -55,6 +60,7 @@ class ImageEditor:
             self.history.append(self.modified_image.copy())
             self.modified_image = self.modified_image.rotate(90, expand=True)
             self.display_image(self.modified_image)
+
     def open_image(self):
         filename = filedialog.askopenfilename(
             filetypes=(("PNG files", "*.png"), ("JPEG/JPG files", "*.jpg;*.jpeg"), ("All files", "*.*")))
@@ -63,6 +69,30 @@ class ImageEditor:
             self.modified_image = self.original_image.copy()
             self.modified_image = self.modified_image.convert("RGB")
             self.display_image(self.modified_image)
+
+    def save_image(self):
+        if self.modified_image:
+            filename = filedialog.asksaveasfilename(defaultextension=".png",
+                                                    filetypes=(
+                                                        ("PNG files", "*.png"),
+                                                        ("All files", "*.*")
+                                                    ))
+            if filename:
+                self.modified_image.save(filename)
+
+    def apply_effect_sepia(self):
+        if self.modified_image:
+            self.history.append(self.modified_image.copy())
+            gray = self.modified_image.convert("L")
+            self.modified_image = Image.merge(
+                "RGB",
+                (
+                    gray.point(lambda x: x * 240 / 255),
+                    gray.point(lambda x: x * 200 / 255),
+                    gray.point(lambda x: x * 145 / 255)
+                )
+            )
+        self.display_image(self.modified_image)
 
     def display_image(self, image):
         width, height = image.size
