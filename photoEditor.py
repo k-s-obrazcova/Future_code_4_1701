@@ -9,6 +9,7 @@ class ImageEditor:
         self.root.geometry("1000x600")
         self.original_image = None
         self.modified_image = None
+        self.history = []
 
         self.create_widgets()
 
@@ -25,22 +26,33 @@ class ImageEditor:
         self.apply_effect_rotate = tk.Button(self.root, text="Повернуть", command=self.rotate_photo)
         self.apply_effect_rotate.pack()
 
+        self.apply_undo = tk.Button(self.root, text="Откатить", command=self.undo_last_action)
+        self.apply_undo.pack()
+
         self.image_label = tk.Label(self.root)
         self.image_label.pack()
 
 
+    def undo_last_action(self):
+        if self.history:
+            self.modified_image = self.history.pop()
+            self.display_image(self.modified_image)
+
     def negative_photo(self):
         if self.modified_image:
+            self.history.append(self.modified_image.copy())
             self.modified_image = ImageOps.invert(self.modified_image)
             self.display_image(self.modified_image)
 
     def blur_photo(self):
         if self.modified_image:
+            self.history.append(self.modified_image.copy())
             self.modified_image = self.modified_image.filter(ImageFilter.GaussianBlur(30.0))
             self.display_image(self.modified_image)
 
     def rotate_photo(self):
         if self.modified_image:
+            self.history.append(self.modified_image.copy())
             self.modified_image = self.modified_image.rotate(90, expand=True)
             self.display_image(self.modified_image)
     def open_image(self):
@@ -49,6 +61,7 @@ class ImageEditor:
         if filename:
             self.original_image = Image.open(filename)
             self.modified_image = self.original_image.copy()
+            self.modified_image = self.modified_image.convert("RGB")
             self.display_image(self.modified_image)
 
     def display_image(self, image):
