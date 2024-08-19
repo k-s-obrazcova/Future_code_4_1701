@@ -54,26 +54,47 @@
 
 
 # Наследование
+#Родительский класс
+# class Person:
+#     def __init__(self, name, age):
+#         self.name = name
+#         self.age = age
+#
+#     def speak(self):
+#         return (f"Мое имя {self.name}, день рождения. Мне {self.age}.")
+
+#Дочерний класс
+# class Employee(Person):
+#     def __init__(self, name, age, rang):
+#         super().__init__(name, age)
+#         self.rang = rang
+#
+#     def speak(self):
+#         return (f"Мое имя {self.name}, день рождения. Мне {self.age}. Моя должность {self.rang}")
+#
+#
+# person = Person("Алиса", 30)
+# employee = Employee("Кирилл", 28, "Юрист")
+#
+# print(person.speak())
+# print(employee.speak())
+
+
+#Инкапсуляция
 class Person:
     def __init__(self, name, age):
-        self.name = name
-        self.age = age
+        self.__name = name
+        self.__age = age
+
+    def get_name(self):
+        return self.__name
+
+    def get_age(self):
+        return self.__age
 
     def speak(self):
-        return (f"Мое имя {self.name}, день рождения. Мне {self.age}.")
+        return (f"Мое имя {self.get_name()}, день рождения. Мне {self.get_age()}.")
 
-
-class Employee(Person):
-    def __init__(self, name, age, rang):
-        super().__init__(name, age)
-        self.rang = rang
-
-    def speak(self):
-        return (f"Мое имя {self.name}, день рождения. Мне {self.age}. Моя должность {self.rang}")
-
-
-person = Person("Алиса", 30)
-employee = Employee("Кирилл", 28, "Юрист")
-
+person = Person("Ольга", 50)
+print(person.get_name())
 print(person.speak())
-print(employee.speak())
