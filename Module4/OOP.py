@@ -81,20 +81,49 @@
 
 
 #Инкапсуляция
+# class Person:
+#     def __init__(self, name, age):
+#         self.__name = name
+#         self.__age = age
+#
+#     def get_name(self):
+#         return self.__name
+#
+#     def get_age(self):
+#         return self.__age
+#
+#     def speak(self):
+#         return (f"Мое имя {self.get_name()}, день рождения. Мне {self.get_age()}.")
+#
+# person = Person("Ольга", 50)
+# print(person.get_name())
+# print(person.speak())
+
+
+#Полиморфизм
+
 class Person:
     def __init__(self, name, age):
-        self.__name = name
-        self.__age = age
-
-    def get_name(self):
-        return self.__name
-
-    def get_age(self):
-        return self.__age
+        self.name = name
+        self.age = age
 
     def speak(self):
-        return (f"Мое имя {self.get_name()}, день рождения. Мне {self.get_age()}.")
+        return (f"Мое имя {self.name}, день рождения. Мне {self.age}.")
 
-person = Person("Ольга", 50)
-print(person.get_name())
-print(person.speak())
+class Employee(Person):
+    def __init__(self, name, age, rang):
+        super().__init__(name, age)
+        self.rang = rang
+
+    def speak(self):
+        return (f"Мое имя {self.name}, день рождения. Мне {self.age}. Моя должность {self.rang}")
+
+
+def introduce(human):
+    print(human.speak())
+
+person = Person("Алиса", 30)
+employee = Employee("Кирилл", 28, "Юрист")
+
+introduce(person)
+introduce(employee)
