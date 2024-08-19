@@ -32,22 +32,48 @@
 
 
 # ООП
+# class Person:
+#     def __init__(self, name, age, birthday, number, seria):
+#         self.name = name
+#         self.age = age
+#         self.birthday = birthday
+#         self.number_passport = number
+#         self.seria_passport = seria
+#
+#     def speak(self):
+#         return (f"Мое имя {self.name}, день рождения {self.birthday}."
+#                 f" Мне {self.age}. Паспортные данные {self.seria_passport} {self.number_passport}")
+#
+#
+# person_first = Person("Ксения", 26, "30.05.1997", 474145, 8456)
+# person_second = Person("Олег", 21, "15.09.2002", 789781, 1256)
+# print(person_first.speak())
+# print(person_second.speak())
+# print(person_first.age)
+# print(person_first.name)
+
+
+# Наследование
 class Person:
-    def __init__(self, name, age, birthday, number, seria):
+    def __init__(self, name, age):
         self.name = name
         self.age = age
-        self.birthday = birthday
-        self.number_passport = number
-        self.seria_passport = seria
 
     def speak(self):
-        return (f"Мое имя {self.name}, день рождения {self.birthday}."
-                f" Мне {self.age}. Паспортные данные {self.seria_passport} {self.number_passport}")
+        return (f"Мое имя {self.name}, день рождения. Мне {self.age}.")
 
 
-person_first = Person("Ксения", 26, "30.05.1997", 474145, 8456)
-person_second = Person("Олег", 21, "15.09.2002", 789781, 1256)
-print(person_first.speak())
-print(person_second.speak())
-print(person_first.age)
-print(person_first.name)
+class Employee(Person):
+    def __init__(self, name, age, rang):
+        super().__init__(name, age)
+        self.rang = rang
+
+    def speak(self):
+        return (f"Мое имя {self.name}, день рождения. Мне {self.age}. Моя должность {self.rang}")
+
+
+person = Person("Алиса", 30)
+employee = Employee("Кирилл", 28, "Юрист")
+
+print(person.speak())
+print(employee.speak())
