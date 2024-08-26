@@ -10,11 +10,11 @@ class TrafficLight:
 
     def change_color(self):
         if self.color == 'red':
-            self.color = 'yellow'
-        elif self.color == 'green':
-            self.color = 'red'
-        elif self.color == 'yellow':
             self.color = 'green'
+        elif self.color == 'green':
+            self.color = 'yellow'
+        elif self.color == 'yellow':
+            self.color = 'red'
         self.update_vehicle_speeds()
 
     def add_vehicle(self, vehicle):
@@ -29,9 +29,16 @@ class TrafficLight:
         for vehicle in self.vehicles:
             vehicle.update_speed()
 
+    def run(self):
+        while True:
+            print(f'РўРµРєСѓС‰РёР№ С†РІРµС‚ {self.color}')
+            time.sleep(self.timer)
+            self.change_color()
+
+
 
 class Vehicle:
-    def __init__(self, vehicle_type, speed):
+    def __init__(self, vehicle_type, speed=0):
         self.vehicle_type = vehicle_type
         self.speed = speed
         self.traffic_light = None
@@ -46,6 +53,23 @@ class Vehicle:
 
     def move(self):
         if self.speed > 0:
-            print(f"{self.vehicle_type} движется со скоростью {self.speed} км/ч")
+            print(f"{self.vehicle_type} РґРІРёР¶РµС‚СЃСЏ СЃРѕ СЃРєРѕСЂРѕСЃС‚СЊСЋ {self.speed} РєРј/С‡")
         else:
-            print(f"{self.vehicle_type} остановился на светофоре")
+            print(f"{self.vehicle_type} РѕСЃС‚Р°РЅРѕРІРёР»СЃСЏ РЅР° СЃРІРµС‚РѕС„РѕСЂРµ")
+
+
+traffic_light = TrafficLight(timer=5)
+car = Vehicle('РњР°С€РёРЅР°')
+truck = Vehicle('Р“СЂСѓР·РѕРІРёРє')
+
+traffic_light.add_vehicle(car)
+traffic_light.add_vehicle(truck)
+
+import threading
+traffic_light_thread = threading.Thread(target=traffic_light.run)
+traffic_light_thread.start()
+
+while True:
+    car.move()
+    truck.move()
+    time.sleep(1)
