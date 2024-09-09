@@ -20,7 +20,7 @@ class Character:
 
     def attack(self, enemy):
         enemy.take_damage(self._damage)
-        print(f"{self._name} атаковал {enemy.get_name} и нанес {self._damage} урона.")
+        print(f"{self._name} атаковал {enemy.get_name()} и нанес {self._damage} урона.")
 
 class Warrior(Character):
     def __init__(self, name, health=100, damage=20):
@@ -29,7 +29,7 @@ class Warrior(Character):
     def special_attack(self, enemy):
         damage = self.get_damage() * 1.5
         enemy.take_damage(damage)
-        print(f"{self._name} ударил мечом {enemy.get_name} и нанес урон {damage}")
+        print(f"{self._name} ударил мечом {enemy.get_name()} и нанес урон {damage}")
 
 class Mage(Character):
     def __init__(self, name, health=70, damage=30):
@@ -39,4 +39,25 @@ class Mage(Character):
     def special_attack(self, enemy):
         damage = self.get_damage() * 2
         enemy.take_damage(damage)
-        print(f"{self._name} ударил огненным шаром {enemy.get_name} и нанес урон {damage}")
+        print(f"{self._name} ударил огненным шаром {enemy.get_name()} и нанес урон {damage}")
+
+
+def fight(character1, character2):
+    while character1.get_health() > 0 and character2.get_health() > 0:
+        character1.attack(character2)
+        if character2.get_health() > 0:
+            character1.special_attack(character2)
+            if character2.get_health() > 0:
+                character2.attack(character1)
+                if character1.get_health() > 0:
+                    character2.special_attack(character1)
+
+    if character1.get_health() > 0:
+        print(f"{character1.get_name()} Победил!")
+    else:
+        print(f"{character2.get_name()} Победил!")
+
+warrior = Warrior("Артём")
+mage = Mage("Кейт")
+
+fight(warrior, mage)
